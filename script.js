@@ -7,20 +7,39 @@ const loginBtn = document.getElementById('login').addEventListener('click', ()=>
 })
 
 //deposit button event handler
-const depositBtn = document.getElementById('deposit-btn').addEventListener('click', ()=>{
-    const depositMoney = document.getElementById('depositMoney').value; //string
-    const depositAmount = parseFloat(depositMoney);
-    const oldValue = document.getElementById('current-deposit').innerText;
-    const oldValueAmount = parseFloat(oldValue);
-    const totalDeposit = depositAmount + oldValueAmount;
-    document.getElementById('current-deposit').innerText = totalDeposit;
+    const depositBtn = document.getElementById('deposit-btn')
+    .addEventListener('click', ()=>{
+    const depositAmount = getInputNumbers('depositMoney');
     
+//deposit add
+    updateSpanText('current-deposit', depositAmount)
 
-    const oldCurrentBalance = document.getElementById('current-balance').innerText;
-    const oldValueBalanceAmount = parseFloat(oldCurrentBalance);
-    const totalBalance = depositAmount + oldValueBalanceAmount;
-    document.getElementById('current-balance').innerText = totalBalance;
+//balance add
+    updateSpanText('current-balance', depositAmount);
 
-
+//clear input text after submission
     document.getElementById('depositMoney').value = '';
 })
+
+    const withDrawBtn = document.getElementById('withDrawBtn').addEventListener(
+        'click', ()=>{
+            const withDrawValue = getInputNumbers('withDraw')
+
+            //span  tag value
+            updateSpanText('withdraw-balance', withDrawValue);
+        }
+    )
+
+
+function getInputNumbers(id) {
+    const amount = document.getElementById(id).value; //string
+    const amountValue = parseFloat(amount);
+    return amountValue;
+}
+
+function updateSpanText(id, depositAmount){
+    const oldCurrentBalance = document.getElementById(id).innerText;
+    const oldValueBalanceAmount = parseFloat(oldCurrentBalance);
+    const totalBalance = depositAmount + oldValueBalanceAmount;
+    document.getElementById(id).innerText = totalBalance;
+}
