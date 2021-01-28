@@ -27,6 +27,9 @@ const loginBtn = document.getElementById('login').addEventListener('click', ()=>
 
             //span  tag value
             updateSpanText('withdraw-balance', withDrawValue);
+            updateSpanText('current-balance', withDrawValue * -1);
+
+            document.getElementById('depositMoney').value = '';
         }
     )
 
